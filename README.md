@@ -1,6 +1,6 @@
 # Beauty Studio Booking
 
-![Beauty Studio Booking Preview](preview.png)
+Beauty Studio Booking Preview
 
 ## 🌟 Live Demo
 
