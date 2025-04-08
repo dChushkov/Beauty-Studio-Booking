@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -52,6 +52,7 @@ const AnimatedRoutes = () => {
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={
@@ -59,6 +60,8 @@ const AnimatedRoutes = () => {
               <AdminDashboard />
             </ProtectedRoute>
           } />
+          {/* Fallback route - redirect to home if no match */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </motion.div>
     </AnimatePresence>
@@ -70,18 +73,35 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-gray-900 transition-colors duration-300">
-            <ScrollProgress />
-            <Navbar />
-            <main className="flex-grow relative">
-              <AnimatedRoutes />
-            </main>
-            <Footer />
-          </div>
+          <AppContent />
         </Router>
       </AuthProvider>
     </ThemeProvider>
   );
 }
+
+// Separate component to use routing hooks
+const AppContent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  React.useEffect(() => {
+    // If we're at the base URL with no path, explicitly navigate to home
+    if (location.pathname === '' || location.pathname === '/') {
+      navigate('/', { replace: true });
+    }
+  }, [location.pathname, navigate]);
+  
+  return (
+    <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-gray-900 transition-colors duration-300">
+      <ScrollProgress />
+      <Navbar />
+      <main className="flex-grow relative">
+        <AnimatedRoutes />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
