@@ -4,7 +4,7 @@ Beauty Studio Booking Preview
 
 ## 🌟 Live Demo
 
-[Visit the application demo](https://dchushkov.github.io/)
+[Visit the application demo](https://dchushkov.github.io/Beauty-Studio-Booking/)
 
 ## 📝 Description
 
