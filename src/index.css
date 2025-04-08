@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cormorant;
+  }
+}
+
+/* Календар стилове за тъмен и светъл режим */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #8b5cf6; /* Стойност за лилавия цвят */
+  --rdp-background-color: rgba(139, 92, 246, 0.2);
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 2px solid rgba(139, 92, 246, 0.5);
+  margin: 0;
+}
+
+/* Промяна на цветовете за светла тема */
+:root.light .rdp {
+  --rdp-accent-color: #7c3aed; /* По-тъмен лилав за светла тема */
+  --rdp-background-color: rgba(124, 58, 237, 0.1);
+}
+
+/* За тъмна тема */
+:root.dark .rdp-day {
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+/* За светла тема */
+:root.light .rdp-day {
+  color: #1f2937;
+  font-size: 0.875rem;
+}
+
+.rdp-day_selected:not(.rdp-day_disabled):not(.rdp-day_outside) {
+  color: white !important;
+  background-color: var(--rdp-accent-color) !important;
+}
+
+.rdp-day_selected:hover:not(.rdp-day_disabled):not(.rdp-day_outside) {
+  background-color: var(--rdp-accent-color) !important;
+}
+
+.rdp-day:hover:not(.rdp-day_disabled):not(.rdp-day_outside) {
+  background-color: var(--rdp-background-color) !important;
+  color: var(--rdp-accent-color) !important;
+}
+
+.rdp-day_today:not(.rdp-day_outside) {
+  font-weight: bold;
+  color: var(--rdp-accent-color) !important;
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: var(--rdp-background-color) !important;
+}
+
+/* Заглавия на клетките */
+:root.dark .rdp-head_cell {
+  color: #8b5cf6;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+:root.light .rdp-head_cell {
+  color: #6d28d9;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+/* Деактивирани дни */
+:root.dark .rdp-day_disabled:not(.rdp-day_outside) {
+  color: rgba(139, 92, 246, 0.2);
+}
+
+:root.light .rdp-day_disabled:not(.rdp-day_outside) {
+  color: rgba(139, 92, 246, 0.3);
+}
+
+/* Бутони за навигация */
+.rdp-nav_button:hover {
+  background-color: var(--rdp-background-color) !important;
+}
+
+.rdp-nav_button svg {
+  fill: var(--rdp-accent-color);
+}
+
+/* Етикет за месец/година */
+:root.dark .rdp-caption_label {
+  color: #8b5cf6;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+:root.light .rdp-caption_label {
+  color: #6d28d9;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Добавяме обща транзиция на всички цветове за плавна смяна на темата */
+.rdp *, :root.dark .rdp *, :root.light .rdp * {
+  transition: color 0.3s, background-color 0.3s;
+}
