@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -51,6 +51,7 @@ const AnimatedRoutes = () => {
         className="w-full flex-grow"
       >
         <Routes location={location}>
+          <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/booking" element={<Booking />} />
@@ -72,7 +73,7 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router>
+        <Router basename="">
           <AppContent />
         </Router>
       </AuthProvider>
@@ -85,10 +86,16 @@ const AppContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  React.useEffect(() => {
-    // If we're at the base URL with no path, explicitly navigate to home
+  useEffect(() => {
+    // Log current location for debugging
+    console.log('Current location:', location);
+    
+    // Force navigation to home if we're at the root
     if (location.pathname === '' || location.pathname === '/') {
-      navigate('/', { replace: true });
+      console.log('Forcing navigation to home');
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 100);
     }
   }, [location.pathname, navigate]);
   

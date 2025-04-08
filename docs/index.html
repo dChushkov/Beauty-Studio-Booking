@@ -1,12 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/Beauty-Studio-Booking/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Glamour Studio - Professional Makeup Services</title>
-    <script type="module" crossorigin src="/Beauty-Studio-Booking/assets/index-Ch0XZ3sZ.js"></script>
+    <script type="module" crossorigin src="/Beauty-Studio-Booking/assets/index-qKD2g1-C.js"></script>
     <link rel="stylesheet" crossorigin href="/Beauty-Studio-Booking/assets/index-Zh047IRC.css">
+    <base href="/Beauty-Studio-Booking/">
+    <script>
+      // This script ensures we force navigation to the hash route
+      window.onload = function() {
+        // If we're at the root without a hash, redirect to the hash route
+        if (window.location.hash === '') {
+          console.log('Redirecting to hash route');
+          window.location.href = window.location.origin + window.location.pathname + '#/';
+        }
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
